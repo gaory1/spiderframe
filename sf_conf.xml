@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root user_agent="Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.146 Safari/537.36" url_count="100000000" url_level="9000">
+  <range url_white="(?im)^http://(oglobo|g1|globoesporte)\.globo\.com/.*(?&lt;!css|js|jpg|pdf|gif|doc|docx|ppt)$" />
+  <policy>
+    <policy_range url_white="(?im)^http://oglobo.globo.com/.*(?&lt;!css|js|jpg|pdf|gif|doc|docx|ppt)$" />
+    <pcre urlmatch="1" regex="^(?&lt;url>.*)$">
+      <cap store_as="$url" capstr="url" out_pattern="----------------------------------------------------------------&#xD;&#xD;&#xD;&#xD;&#xD;&#xD;&#xD;&#xA;($url)&#xD;&#xD;&#xD;&#xD;&#xD;&#xD;&#xA;" />
+    </pcre>
+    <pcre regex="(?is)&lt;title>\s*(?&lt;title>[^\r\n]*).*&lt;\/title>">
+      <cap content_as="$title" out_pattern="($title)&#xD;&#xD;&#xD;&#xD;&#xD;&#xD;&#xA;&#xD;&#xD;&#xD;&#xD;&#xD;&#xD;&#xD;&#xA;" capstr="title">
+        <action fromendflg="1" />
+      </cap>
+    </pcre>
+    <pcre regex="(?is)&lt;div class=&quot;corpo large-16 columns&quot; itemprop=&quot;articleBody&quot;>(?&lt;articleBody>.*?&lt;p>.*?&lt;/p>)" repeat="1">
+      <cap content_as="$articleBody" out_pattern="($articleBody)&#xD;&#xD;&#xD;&#xD;&#xD;&#xD;&#xD;&#xA;" capstr="articleBody">
+        <action fromendflg="1" />
+      </cap>
+    </pcre>
+  </policy>
+
+  <policy>
+    <policy_range url_white="(?im)^http://(g1|globoesporte).globo.com/.*(?&lt;!css|js|jpg|pdf|gif|doc|docx|ppt)$" />
+    <pcre urlmatch="1" regex="^(?&lt;url>.*)$">
+      <cap store_as="$url" capstr="url" out_pattern="----------------------------------------------------------------&#xD;&#xD;&#xD;&#xD;&#xD;&#xD;&#xD;&#xA;($url)&#xD;&#xD;&#xD;&#xD;&#xD;&#xD;&#xA;" />
+    </pcre>
+    <pcre regex="(?is)&lt;title>\s*(?&lt;title>[^\r\n]*).*&lt;\/title>">
+      <cap content_as="$title" out_pattern="($title)&#xD;&#xD;&#xD;&#xD;&#xD;&#xD;&#xA;&#xD;&#xD;&#xD;&#xD;&#xD;&#xD;&#xD;&#xA;" capstr="title">
+        <action fromendflg="1" />
+      </cap>
+    </pcre>
+    <pcre regex="(?is)&lt;div class=&quot;materia-conteudo entry-content&quot; id=&quot;materia-letra&quot;.*?>(?&lt;articleBody>.*?(&lt;div.*?(&lt;div.*?(&lt;div.*?(&lt;div.*?&lt;/div>.*?)*&lt;/div>.*?)*&lt;/div>.*?)*&lt;/div>.*?)*)&lt;/div>" repeat="1">
+      <cap content_as="$articleBody" out_pattern="($articleBody)&#xD;&#xD;&#xD;&#xD;&#xD;&#xD;&#xD;&#xA;" capstr="articleBody">
+        <action fromendflg="1" />
+      </cap>
+    </pcre>
+    <pcre regex="(?is)&lt;span class=&quot;conteudo-post&quot; itemprop=&quot;text&quot;>(?&lt;articleBody>.*)&lt;span>" repeat="1">
+      <cap content_as="$articleBody" out_pattern="($articleBody)&#xD;&#xD;&#xD;&#xD;&#xD;&#xD;&#xD;&#xA;" capstr="articleBody">
+        <action fromendflg="1" />
+      </cap>
+    </pcre>
+  </policy>
+
+</root>
